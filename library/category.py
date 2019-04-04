@@ -21,20 +21,21 @@ def get_categories():
                     for line in owo:
                         # line[:-1] to remove newline char
                         line = line[:-1]
-                        try:
-                            # Get category and items
-                            category, items = line.split(' = ')
-                            items = items.split(',')
-                            if category in categories:
-                                print('Warning: Overwriting category already set.')
-                            categories[category] = items
-                            print(category, items)
-                        except ValueError:
-                            # Invalid line, ignore for now
-                            print('WARNING: Invalid line in file {}, if you haven\'t edited the file, report this error to the developer (Along with the file!)'.format(file))
-                        except Exception as e:
-                            print('Error: {}'.format(e))
-                        # print(line)
+                        if not line.startswith('//'):
+                            try:
+                                # Get category and items
+                                category, items = line.split(' = ')
+                                items = items.split(',')
+                                if category in categories:
+                                    print('Warning: Overwriting category already set.')
+                                categories[category] = items
+                                print(category, items)
+                            except ValueError:
+                                # Invalid line, ignore for now
+                                print('WARNING: Invalid line in file {}, if you haven\'t edited the file, report this error to the developer (Along with the file!)'.format(file))
+                            except Exception as e:
+                                print('Error: {}'.format(e))
+                            # print(line)
                 else: print('doop')
 get_categories()
 def make_category(category):
