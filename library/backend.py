@@ -1,11 +1,11 @@
 import os
 
 # DEBUG for now:
-__file__ = os.getcwd()+'\\simple-file-sort'
+# __file__ = os.getcwd()+'\\simple-file-sort'
 
 FIRST_LINE = '(DO NOT EDIT) Simple File Sort Category File\n'
 
-DIRECTORY = os.path.dirname(__file__) + '\\library\\categories'
+DIRECTORY = os.path.dirname(__file__) + '\\categories'
 
 def get_categories():
     categories = {}
@@ -67,7 +67,7 @@ def write_categories(categories):
         if category == 'IGNORE':
             continue
         # Complete overwrite of file. (IF it exists files are appended with .cat, so VERY UNLIKELY to remove files )
-        with open(DIRECTORY+ '\\' + category.lower(), 'w') as owo:
+        with open(DIRECTORY+ '\\' + category.lower() + '.cat', 'w') as owo:
             values = ','.join(categories[category])
             owo.write(FIRST_LINE)
             owo.write('//This is an example comment. Follow the form of this file when designing your own (Recommended: One category per file)\n//Example: user_category = fileext,fileext,fileext [NO SPACES] \n')
