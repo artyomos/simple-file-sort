@@ -24,7 +24,10 @@ def get_categories():
                                 # Get category and items
                                 category, items = line.split(' = ')
                                 # Create items list, and make sure to strip any extraneous spaces
-                                items = map(strip(), items.split(','))
+                                if isinstance(items, str):
+                                    items = [items.strip()]
+                                else:
+                                    items = [item.strip() for item in items]
                                 if category in categories:
                                     print('WARNING: Overwriting category already set.')
                                 categories[category] = items
