@@ -1,4 +1,3 @@
-# os.makedirs(path, exist_ok=True)
 import os
 import shutil
 from library import backend
@@ -28,6 +27,7 @@ if __name__ == '__main__':
                         print('\nUh oh! Found an extension (.{}) that isn\'t in any category! \nWhat would you like to do with it?'.format(extension))
                         result = input('Please type only what is shown:\n1. Ignore and leave it\n2.Define a category for it')
                         if result == '1':
+                            backend.add_extension(categories, 'IGNORE', extension)
                             destination_folder = 'IGNORE'
                             break
                         elif result == '2':
@@ -53,4 +53,8 @@ if __name__ == '__main__':
             if destination_folder == 'IGNORE': pass
             else:
                 print('Moved {} to folder {}'.format(file, destination_folder))
-                shutil.move(dir+file, destination_folder)
+                os.makedirs(destination_folder, exist_ok=True)
+                shutil.move(dir+ '\\'+file, destination_folder+'\\')
+    print('All file sorting finished. Writing categories..')
+    backend.write_categories(categories)
+    input('Done. Press ENTER to close...')
