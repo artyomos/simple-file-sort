@@ -64,6 +64,8 @@ def write_categories(categories):
     '''
     categories = {categories[key]:[value for value in categories if categories[value] == categories[key]] for key in categories}
     for category in categories:
+        if category == 'IGNORE':
+            continue
         # Complete overwrite of file. (IF it exists files are appended with .cat, so VERY UNLIKELY to remove files )
         with open(DIRECTORY+ '\\' + category.lower(), 'w') as owo:
             values = ','.join(categories[category])
