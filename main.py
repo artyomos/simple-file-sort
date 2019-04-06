@@ -12,6 +12,8 @@ if __name__ == '__main__':
 
     # For now only works on script directory
     dir = os.path.dirname(__file__)
+
+    categories = get_categories()
     print(dir)
     for file in os.listdir(dir):
         if os.path.isfile(file):
