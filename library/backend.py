@@ -13,8 +13,6 @@ def get_categories():
     # Make the category directory if it doesn't exist
     os.makedirs(DIRECTORY, exist_ok=True)
     for file in os.listdir(DIRECTORY):
-        #print(file)
-        #print(file.endswith('.cat'))
         if file.endswith('.cat'):
             with open(DIRECTORY+ '\\' + file, 'r') as owo:
                 if owo.readline() == FIRST_LINE:
@@ -25,7 +23,8 @@ def get_categories():
                             try:
                                 # Get category and items
                                 category, items = line.split(' = ')
-                                items = items.split(',')
+                                # Create items list, and make sure to strip any extraneous spaces
+                                items = map(strip(), items.split(','))
                                 if category in categories:
                                     print('WARNING: Overwriting category already set.')
                                 categories[category] = items
