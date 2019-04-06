@@ -10,7 +10,7 @@ if __name__ == '__main__':
             break
         else:
             print('The path you gave was invalid! Make sure you are typing it properly...\n')
-    print('\nSorting Files... \n\nYou may be asked to select a category for each file, you can add your own, or select from already given')
+    print('\nSorting Files in {}... \n\nYou may be asked to select a category for unknown file extensions'.format(path))
     print('Please note EVERY FILE will be moved to a folder, so BE CAREFUL HOW YOU USE THIS')
     input('\nPress ENTER to continue... or close this window to cancel ')
 
