@@ -6,6 +6,7 @@ __file__ = os.getcwd()+'\\simple-file-sort'
 FIRST_LINE = '(DO NOT EDIT) Simple File Sort Category File\n'
 
 DIRECTORY = os.path.dirname(__file__) + '\\library\\categories'
+
 def get_categories():
     categories = {}
 
@@ -35,13 +36,14 @@ def get_categories():
                             except Exception as e:
                                 print('Error: {}'.format(e))
                             # print(line)
-                else: print('doop')
+                else: print('Invalid File in directory: {} [IGNORING]'.format(file))
 
-    # This one-liner inverts the dictionary, offering the abilit to search for category based on file extension
+    # This one-liner inverts the dictionary, offering the ability to search for category based on file extension
+    # This line is very case-specific so don't copy-paste to other projects!!
     categories = {value: key for key in categories for value in categories[key]}
     return categories
 
-def make_category(categories, category, file):
+def add_extension(categories, category, file):
     extension = file.split('.')[-1]
     try:
         if category == categories[extension]:
@@ -53,15 +55,16 @@ def make_category(categories, category, file):
         categories[extension] = category
         return True # Category Created
 
-def update_category(categories, new_extension, category):
-    pass
-
 def write_categories(categories):
-    # Don't bother comprehending this dictionary comprehension it took me forever to figure out how to do :)))))
-    # Original (wrong version)
-    #categories = {categories[key]: [key for value in categories if categories[key] == categories[value]] for key in categories }
+    '''
+    This insanely complicated one-liner inverts the dictionary from its 'file-extension':'category' to 'category': [list of 'file-extension']
+
+    Original (wrong version)
+    categories = {categories[key]: [key for value in categories if categories[key] == categories[value]] for key in categories }
+    '''
     categories = {categories[key]:[value for value in categories if categories[value] == categories[key]] for key in categories}
     for category in categories:
+        # Complete overwrite of file. (IF it exists files are appended with .cat, so VERY UNLIKELY to remove files )
         with open(DIRECTORY+ '\\' + category.lower(), 'w') as owo:
             values = ','.join(categories[category])
             owo.write(FIRST_LINE)
@@ -71,9 +74,15 @@ def write_categories(categories):
 
 def test_functions():
     print('Testing get_categories:')
-    print(get_categories())
+    categories = get_categories()
+    print(str(categories)+'\n')
+
+    print('Testing add_extension:')
+    print('Result: {}\n'.format(add_extension(categories, 'apples', 'app')))
 
     print('Testing write_categories:')
     print(write_categories(categories))
-    
-test_functions()
+
+
+
+#test_functions()
